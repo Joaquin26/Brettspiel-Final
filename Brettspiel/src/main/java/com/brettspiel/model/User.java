@@ -13,7 +13,7 @@ import javax.validation.constraints.Size;
 import lombok.Data;
 
 @Entity
-@Table(name = "Users")
+@Table(name = "users")
 @Data
 public class User {
 	@Id
