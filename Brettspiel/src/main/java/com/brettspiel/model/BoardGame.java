@@ -57,4 +57,7 @@ public class BoardGame {
 		inverseJoinColumns = @JoinColumn(name = "category_id")
 	)
 	private Set<Category> categories = new HashSet<>();
+	
+	@ManyToMany(mappedBy = "boardGames")
+	private Set<Playlist> playLists = new HashSet<>();
 }

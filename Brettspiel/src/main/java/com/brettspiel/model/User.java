@@ -1,5 +1,7 @@
 package com.brettspiel.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
@@ -39,4 +42,8 @@ public class User {
 	@ManyToOne
 	@JoinColumn(name="membership_id",nullable = false)
 	private Membership membership;
+	
+	@OneToMany(mappedBy = "user")
+	private List<Playlist> playlists;
+	
 }
