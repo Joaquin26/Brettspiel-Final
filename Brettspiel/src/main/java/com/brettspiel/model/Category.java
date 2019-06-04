@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 @Entity
@@ -27,6 +29,8 @@ public class Category {
 	@Column(name = "description", nullable = false, length = 250)
 	private String description;
 	
+	
 	@ManyToMany(mappedBy = "categories")
+	@JsonIgnore
 	private Set<BoardGame> boardGames = new HashSet<>();
 }
