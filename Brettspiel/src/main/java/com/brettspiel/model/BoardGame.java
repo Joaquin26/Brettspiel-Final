@@ -65,7 +65,7 @@ public class BoardGame {
 	
 	@JsonIgnore
 	@ManyToMany(mappedBy = "boardGames")
-	private Set<Playlist> playLists = new HashSet<>();
+	private Set<PlayList> playLists = new HashSet<>();
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "boardGame")

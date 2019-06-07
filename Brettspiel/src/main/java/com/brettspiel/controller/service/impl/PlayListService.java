@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.brettspiel.controller.service.IPlayListService;
-import com.brettspiel.model.Playlist;
+import com.brettspiel.model.PlayList;
 import com.brettspiel.model.repository.IPlayListRepository;
 
 @Service
@@ -17,12 +17,12 @@ public class PlayListService implements IPlayListService {
 	private IPlayListRepository playListRepository;
 	
 	@Override
-	public Playlist insert(Playlist t) {
+	public PlayList insert(PlayList t) {
 		return playListRepository.save(t);
 	}
 
 	@Override
-	public Playlist update(Playlist t) {
+	public PlayList update(PlayList t) {
 		return playListRepository.save(t);
 	}
 
@@ -32,12 +32,12 @@ public class PlayListService implements IPlayListService {
 	}
 
 	@Override
-	public Optional<Playlist> findById(int id) {
+	public Optional<PlayList> findById(int id) {
 		return playListRepository.findById(id);
 	}
 
 	@Override
-	public List<Playlist> findAll() {
+	public List<PlayList> findAll() {
 		return playListRepository.findAll();
 	}
 

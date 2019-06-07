@@ -19,7 +19,7 @@ import lombok.Data;
 @Entity
 @Table(name = "playlists")
 @Data
-public class Playlist {
+public class PlayList {
 	@Id
 	@GeneratedValue(strategy =GenerationType.IDENTITY)
 	private Integer id;

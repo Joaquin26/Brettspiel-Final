@@ -46,7 +46,7 @@ public class User {
 	private Membership membership;
 	
 	@OneToMany(mappedBy = "user")
-	private List<Playlist> playlists;
+	private List<PlayList> playlists;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "user")

@@ -1,7 +1,7 @@
 package com.brettspiel.controller.service;
 
-import com.brettspiel.model.Playlist;
+import com.brettspiel.model.PlayList;
 
-public interface IPlayListService extends ICrudService<Playlist> {
+public interface IPlayListService extends ICrudService<PlayList> {
 
 }
