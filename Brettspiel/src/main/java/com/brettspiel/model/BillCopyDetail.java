@@ -1,6 +1,5 @@
 package com.brettspiel.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,35 +8,25 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import lombok.Data;
 
 @Entity
-@Table(name = "webcartdetails")
+@Table(name = "bill_copy_details")
 @Data
-public class WebCartDetail {
+public class BillCopyDetail {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@JsonIgnore
 	@ManyToOne
-	@JoinColumn(name="webcart_id",nullable = false)
-	private WebCart webCart;
+	@JoinColumn(name="bill_id",nullable = false)
+	private Bill bill;
 	
 	@ManyToOne
-	@JoinColumn(name="snack_id")
-	private Snack snack;
-	
-	@ManyToOne
-	@JoinColumn(name="boardGame_id")
-	private BoardGame boardGame;
+	@JoinColumn(name="copy_id")
+	private Copy copy;
 	
 	@ManyToOne
 	@JoinColumn(name="promotion_id")
-	private Promotion promotion ;
-	
-	@Column(name = "quantity",nullable = false)
-	private Integer quantity;
+	private Promotion promotion;
 }

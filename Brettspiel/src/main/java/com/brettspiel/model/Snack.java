@@ -44,5 +44,14 @@ public class Snack {
 	@OneToMany(mappedBy = "snack")
 	private List<WebCartDetail> webCartDetails;
 	
+	@JsonIgnore
+	@OneToMany(mappedBy = "snack")
+	private List<PromotionDetail> promotionDetails;
+	
+	@OneToMany(mappedBy = "snack")
+	private List<Image> images;
+	
+	@OneToMany(mappedBy = "snack")
+	private List<Batch> batches;
 }
 

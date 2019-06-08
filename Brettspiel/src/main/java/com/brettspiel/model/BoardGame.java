@@ -74,4 +74,10 @@ public class BoardGame {
 	@JsonIgnore
 	@OneToMany(mappedBy = "boardGame")
 	private List<WebCartDetail> webCartDetails;
+	
+	@OneToMany(mappedBy = "boardGame")
+	private List<PromotionDetail> promotionDetails;
+	
+	@OneToMany(mappedBy = "snack")
+	private List<Image> images;
 }

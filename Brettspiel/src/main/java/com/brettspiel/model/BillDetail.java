@@ -9,35 +9,35 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import lombok.Data;
 
 @Entity
-@Table(name = "webcartdetails")
+@Table(name = "billDetails")
 @Data
-public class WebCartDetail {
+public class BillDetail {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@JsonIgnore
 	@ManyToOne
-	@JoinColumn(name="webcart_id",nullable = false)
-	private WebCart webCart;
+	@JoinColumn(name="bill_id",nullable = false)
+	private Bill bill;
 	
 	@ManyToOne
-	@JoinColumn(name="snack_id")
-	private Snack snack;
+	@JoinColumn(name="batch_id",nullable = false)
+	private Batch batch;
 	
 	@ManyToOne
-	@JoinColumn(name="boardGame_id")
-	private BoardGame boardGame;
-	
-	@ManyToOne
-	@JoinColumn(name="promotion_id")
-	private Promotion promotion ;
+	@JoinColumn(name="promotion_id",nullable = false)
+	private Promotion promotion;
 	
 	@Column(name = "quantity",nullable = false)
 	private Integer quantity;
+	
+	@Column(name = "price_snacks",nullable = false)
+	private Float priceSnacks;
+	
+	
+	
+	
 }
