@@ -19,6 +19,7 @@ public class MembershipService implements IMembershipService {
 	@Override
 	public Membership insert(Membership t) {
 		return membershipRepository.save(t);
+			
 	}
 
 	@Override
