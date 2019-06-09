@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 @Entity
@@ -31,7 +33,7 @@ public class Membership {
 
 	@Column(name = "discount", nullable = false)
 	private Float discount;
-
+	@JsonIgnore
 	@OneToMany(mappedBy = "membership")
 	private List<User> users;
 }
