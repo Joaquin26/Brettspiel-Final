@@ -29,7 +29,7 @@ public class BoardGame {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@Column(name = "name", nullable = false, length = 100)
+	@Column(name = "name", nullable = false, length = 150, unique = true)
 	private String name;
 	
 	@Column(name = "description", nullable = false, length = 750)
@@ -47,8 +47,17 @@ public class BoardGame {
 	@Column(name = "rented", nullable = false)
 	private Integer rented;
 	
-	@Column(name = "price_per_day")
+	@Column(name = "price_per_day", nullable = false)
 	private Float pricePerDay;
+	
+	@Column(name= "min_number_players", nullable = false)
+	private Integer minNumberPlayers;
+	
+	@Column(name= "max_number_players", nullable = false)
+	private Integer maxNumberPlayers;
+	
+	@Column(name= "min_age", nullable = false)
+	private Integer minAge;
 	
 	@Column(name = "cost", nullable = false)
 	private Float cost;

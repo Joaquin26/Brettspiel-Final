@@ -88,4 +88,13 @@ public class BoardGameController {
 			throw new ModelNotFoundException("ID: "+id);
 
 	}
+	
+	@GetMapping(value = "/filter/{categoryName}/{age}/{minCost}/{maxCost}/{miPlayers}")
+	@ApiOperation(value = "List BoardGames by filter",notes="Service to list all boardGames filters")
+	@ApiResponses(value = {@ApiResponse(code=201,message = "BoardGames found"), @ApiResponse(code=404,message = "BoardGames not found")})
+	public ResponseEntity<List<BoardGame>> filter(String categoryName,Integer age,Float minCost,Float maxCost,Integer minPlayers){
+		List<BoardGame> boardGames= new ArrayList<BoardGame>();
+		boardGames=boardGameService.filter(categoryName,age,minCost,maxCost,minPlayers);
+		return new ResponseEntity<List<BoardGame>>(boardGames,HttpStatus.OK);
+	}
 }
