@@ -40,5 +40,11 @@ public class WebCartService implements IWebCartService {
 	public List<WebCart> findAll() {
 		return webCartRepository.findAll();
 	}
+
+	@Override
+	public Optional<WebCart> findByUserId(int userId) {
+		return webCartRepository.findByUserId(userId);
+	}
+
 	
 }
