@@ -1,6 +1,7 @@
 package com.brettspiel.controller;
 
 import java.net.URI;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -23,6 +24,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.brettspiel.controller.service.IWebCartService;
 import com.brettspiel.exception.ModelNotFoundException;
+import com.brettspiel.model.User;
 import com.brettspiel.model.WebCart;
 
 import io.swagger.annotations.Api;
@@ -86,6 +88,22 @@ public class WebCartController {
 			return new ResponseEntity<WebCart>(webCart.get(),HttpStatus.OK);
 		else 
 			throw new ModelNotFoundException("ID: "+id);
+
+	}
+	@GetMapping(value = "findWebcartByUserId/{id}")
+	@ApiOperation(value = "Get a WebCart by userId",notes="Service to get a WebCart by user id")
+	@ApiResponses(value = {@ApiResponse(code=201,message = "WebCart found"), @ApiResponse(code=404,message = "WebCart not found")})
+	public ResponseEntity<WebCart> findByUserId(@PathVariable("id") Integer id){
+		Optional<WebCart> webCart=webCartService.findByUserId(id);
+		if(webCart.isPresent())
+			return new ResponseEntity<WebCart>(webCart.get(),HttpStatus.OK);
+		else 
+		{	User user=new User();
+			user.setId(id);
+			WebCart wt=new WebCart("",LocalDate.now(),LocalDate.now(),LocalDate.now(),user,null);
+			WebCart newWebCart=webCartService.insert(wt);
+			return new ResponseEntity<WebCart>(newWebCart,HttpStatus.OK);
+		}
 
 	}
 }

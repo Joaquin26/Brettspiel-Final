@@ -32,7 +32,7 @@ public class BoardGame {
 	@Column(name = "name", nullable = false, length = 100)
 	private String name;
 	
-	@Column(name = "description", nullable = false, length = 250)
+	@Column(name = "description", nullable = false, length = 750)
 	private String description;
 	
 	@Column(name = "tutorial_link", nullable = false, length = 300)
@@ -74,10 +74,10 @@ public class BoardGame {
 	@JsonIgnore
 	@OneToMany(mappedBy = "boardGame")
 	private List<WebCartDetail> webCartDetails;
-	
+	@JsonIgnore
 	@OneToMany(mappedBy = "boardGame")
 	private List<PromotionDetail> promotionDetails;
 	
-	@OneToMany(mappedBy = "snack")
+	@OneToMany(mappedBy = "boardGame")
 	private List<Image> images;
 }
