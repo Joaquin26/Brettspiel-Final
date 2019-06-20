@@ -1,14 +1,12 @@
 spring:
  datasource:
-    url: jdbc:postgresql://localhost:5432/Brettspiel
-    username: postgres
-    password: admin
+    url: jdbc:postgresql://ec2-107-20-155-148.compute-1.amazonaws.com:5432/d2b9d63jaqe45v
+    username: xeylfjdbtnjdit
+    password: d5cce1171241c37715a55ef0e92eaed77228da0be32a957797649944ec549bec
     driver-class-name: org.postgresql.Driver
- jackson:    serialization:      WRITE_DATES_AS_TIMESTAMPS : false      
  jpa:
     database: postgresql
     hibernate:
       ddl-auto: create-drop
     show-sql: true
     properties.hibernate.temp.use_jdbc_metadata_defaults: false
-    
