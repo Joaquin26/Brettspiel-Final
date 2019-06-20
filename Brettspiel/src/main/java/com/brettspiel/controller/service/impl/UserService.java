@@ -40,5 +40,11 @@ public class UserService implements IUserService {
 	public List<User> findAll() {
 		return userRepository.findAll();
 	}
+
+	@Override
+	public Optional<User> findByCredentials(String username, String password) {
+		// TODO Auto-generated method stub
+		return userRepository.findByCredentials(username, password);
+	}
 	
 }
