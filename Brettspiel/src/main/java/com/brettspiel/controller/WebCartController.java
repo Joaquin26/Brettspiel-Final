@@ -90,7 +90,7 @@ public class WebCartController {
 			throw new ModelNotFoundException("ID: "+id);
 
 	}
-	@GetMapping(value = "findWebcartByUserId/{id}")
+	@GetMapping(value = "/findWebcartByUserId/{id}")
 	@ApiOperation(value = "Get a WebCart by userId",notes="Service to get a WebCart by user id")
 	@ApiResponses(value = {@ApiResponse(code=201,message = "WebCart found"), @ApiResponse(code=404,message = "WebCart not found")})
 	public ResponseEntity<WebCart> findByUserId(@PathVariable("id") Integer id){
