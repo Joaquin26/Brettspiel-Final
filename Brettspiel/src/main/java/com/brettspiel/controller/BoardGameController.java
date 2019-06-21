@@ -88,4 +88,56 @@ public class BoardGameController {
 			throw new ModelNotFoundException("ID: "+id);
 
 	}
+	
+	@GetMapping(value = "/filterCategory/{categoryName}/{age}/{minCost}/{maxCost}/{minPlayers}/{name}")
+	@ApiOperation(value = "List BoardGames by filter",notes="Service to list all boardGames filters with all filters")
+	@ApiResponses(value = {@ApiResponse(code=201,message = "BoardGames found"), @ApiResponse(code=404,message = "BoardGames not found")})
+	public ResponseEntity<List<BoardGame>> filter(@PathVariable("categoryName") String categoryName, @PathVariable("age") Integer age,
+			@PathVariable("minCost") Float minCost,@PathVariable("maxCost")Float maxCost,@PathVariable("minPlayers")Integer minPlayers,
+			@PathVariable("name") String name){
+		List<BoardGame> boardGames= new ArrayList<BoardGame>();
+		boardGames=boardGameService.filter(categoryName,age,minCost,maxCost,minPlayers,name);
+		return new ResponseEntity<List<BoardGame>>(boardGames,HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/filterCategory/{categoryName}/{age}/{minCost}/{maxCost}/{minPlayers}")
+	@ApiOperation(value = "List BoardGames by filter",notes="Service to list all boardGames filters with all filters")
+	@ApiResponses(value = {@ApiResponse(code=201,message = "BoardGames found"), @ApiResponse(code=404,message = "BoardGames not found")})
+	public ResponseEntity<List<BoardGame>> filter(@PathVariable("categoryName") String categoryName, @PathVariable("age") Integer age,
+			@PathVariable("minCost") Float minCost,@PathVariable("maxCost")Float maxCost,@PathVariable("minPlayers")Integer minPlayers){
+		List<BoardGame> boardGames= new ArrayList<BoardGame>();
+		boardGames=boardGameService.filter(categoryName,age,minCost,maxCost,minPlayers,"");
+		return new ResponseEntity<List<BoardGame>>(boardGames,HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/filter/{age}/{minCost}/{maxCost}/{minPlayers}")
+	@ApiOperation(value = "List BoardGames by filter",notes="Service to list all boardGames filters with all filters")
+	@ApiResponses(value = {@ApiResponse(code=201,message = "BoardGames found"), @ApiResponse(code=404,message = "BoardGames not found")})
+	public ResponseEntity<List<BoardGame>> filter( @PathVariable("age") Integer age, @PathVariable("minCost") Float minCost,
+			@PathVariable("maxCost")Float maxCost,@PathVariable("minPlayers")Integer minPlayers){
+		List<BoardGame> boardGames= new ArrayList<BoardGame>();
+		boardGames=boardGameService.filter("",age,minCost,maxCost,minPlayers,"");
+		return new ResponseEntity<List<BoardGame>>(boardGames,HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/filter/{age}/{minCost}/{maxCost}/{minPlayers}/{name}")
+	@ApiOperation(value = "List BoardGames by filter",notes="Service to list all boardGames filters with all filters")
+	@ApiResponses(value = {@ApiResponse(code=201,message = "BoardGames found"), @ApiResponse(code=404,message = "BoardGames not found")})
+	public ResponseEntity<List<BoardGame>> filter( @PathVariable("age") Integer age, @PathVariable("minCost") Float minCost,
+			@PathVariable("maxCost")Float maxCost,@PathVariable("minPlayers")Integer minPlayers,@PathVariable("name") String name){
+		List<BoardGame> boardGames= new ArrayList<BoardGame>();
+		boardGames=boardGameService.filter("",age,minCost,maxCost,minPlayers,name);
+		return new ResponseEntity<List<BoardGame>>(boardGames,HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/name/{name}")
+	@ApiOperation(value = "List BoardGames by filter",notes="Service to list all boardGames filters")
+	@ApiResponses(value = {@ApiResponse(code=201,message = "BoardGames found"), @ApiResponse(code=404,message = "BoardGames not found")})
+	public ResponseEntity<BoardGame> filter(@PathVariable("name") String name){
+		Optional<BoardGame> boardGame=boardGameService.findByName(name);
+		if(boardGame.isPresent())
+			return new ResponseEntity<BoardGame>(boardGame.get(),HttpStatus.OK);
+		else 
+			throw new ModelNotFoundException("Name: "+name);
+	}
 }

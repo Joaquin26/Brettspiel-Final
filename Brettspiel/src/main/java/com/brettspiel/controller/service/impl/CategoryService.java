@@ -41,4 +41,9 @@ public class CategoryService implements ICategoryService {
 		return categoryRepository.findAll();
 	}
 
+	@Override
+	public Optional<Category> findByName(String name) {
+		return categoryRepository.findByName(name);
+	}
+
 }
