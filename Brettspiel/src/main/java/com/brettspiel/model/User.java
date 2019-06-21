@@ -47,6 +47,7 @@ public class User {
 	@JoinColumn(name="membership_id",nullable = false)
 	private Membership membership;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "user")
 	private List<PlayList> playlists;
 	

@@ -14,6 +14,9 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 @Entity
@@ -42,5 +45,6 @@ public class PlayList {
 		joinColumns = @JoinColumn(name = "playlist_id"),
 		inverseJoinColumns = @JoinColumn(name = "boardgame_id")
 	)
+	@JsonIgnore
 	private Set<BoardGame> boardGames= new HashSet<>();
 }

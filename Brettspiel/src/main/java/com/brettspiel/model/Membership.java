@@ -33,7 +33,7 @@ public class Membership {
 
 	@Column(name = "discount", nullable = false)
 	private Float discount;
-	@JsonIgnore
+	@JsonIgnore	
 	@OneToMany(mappedBy = "membership")
 	private List<User> users;
 }
