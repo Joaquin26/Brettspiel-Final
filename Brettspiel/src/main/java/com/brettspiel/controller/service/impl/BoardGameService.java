@@ -18,6 +18,7 @@ public class BoardGameService implements IBoardGameService {
 	
 	@Override
 	public BoardGame insert(BoardGame t) {
+		t.setName(t.getName().toUpperCase());
 		return boardGameRepository.save(t);
 	}
 
@@ -42,8 +43,13 @@ public class BoardGameService implements IBoardGameService {
 	}
 
 	@Override
-	public List<BoardGame> filter(String categoryName,Integer age, Float minCost,Float maxCost, Integer minPlayers) {
-		return boardGameRepository.filter(categoryName,age,minCost,maxCost,minPlayers);
+	public List<BoardGame> filter(String categoryName,Integer age, Float minCost,Float maxCost, Integer minPlayers,String name) {
+		return boardGameRepository.filter(categoryName,age,minCost,maxCost,minPlayers,name.toUpperCase());
+	}
+
+	@Override
+	public Optional<BoardGame> findByName(String name) {
+		return boardGameRepository.findByName(name.toUpperCase());
 	}
 
 }
