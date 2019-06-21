@@ -41,4 +41,9 @@ public class BoardGameService implements IBoardGameService {
 		return boardGameRepository.findAll();
 	}
 
+	@Override
+	public List<BoardGame> filter(String categoryName,Integer age, Float minCost,Float maxCost, Integer minPlayers) {
+		return boardGameRepository.filter(categoryName,age,minCost,maxCost,minPlayers);
+	}
+
 }

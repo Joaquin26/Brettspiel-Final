@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
@@ -20,6 +21,7 @@ import lombok.Data;
 @Entity
 @Table(name = "users")
 @Data
+@NamedQuery(name="User.findByCredentials", query="Select w from User w where w.username= ?1 and w.password =?2")
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

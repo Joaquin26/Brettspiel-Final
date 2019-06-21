@@ -23,6 +23,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.brettspiel.controller.service.IUserService;
 import com.brettspiel.exception.ModelNotFoundException;
+import com.brettspiel.model.LoginBean;
 import com.brettspiel.model.User;
 
 import io.swagger.annotations.Api;
@@ -88,5 +89,20 @@ public class UserController {
 		else 
 			throw new ModelNotFoundException("ID: "+id);
 
+	}
+	
+	@PostMapping(value = "/findByCredentials")
+	@ApiOperation(value = "retrieve User by credentials",notes="Service to retrieve user by creedentials")
+	@ApiResponses(value = {@ApiResponse(code=201,message = "User created correctly"), @ApiResponse(code=400,message = "invalid request")})
+	public ResponseEntity<User> findByCredentials(@Valid @RequestBody LoginBean lg){
+		User userNew=new User();
+		Optional<User> user=userService.findByCredentials(lg.getUsername(),lg.getPassword());
+		if(user.isPresent()) {
+			return new ResponseEntity<User>(user.get(),HttpStatus.OK);
+		}
+		else {
+			userNew.setId(-1);
+			return new ResponseEntity<User>(userNew,HttpStatus.OK);
+		}
 	}
 }
