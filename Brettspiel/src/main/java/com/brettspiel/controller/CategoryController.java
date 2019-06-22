@@ -97,7 +97,11 @@ public class CategoryController {
 		if(category.isPresent())
 			return new ResponseEntity<Category>(category.get(),HttpStatus.OK);
 		else 
-			throw new ModelNotFoundException("Name: "+name);
+		{
+			Category category2=new Category();
+			category2.setId(-1);
+			return new ResponseEntity<Category>(category2,HttpStatus.OK);
+		}
 
 	}
 }
