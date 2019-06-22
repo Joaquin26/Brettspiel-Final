@@ -49,6 +49,7 @@ public class WebCart {
 	
 	
 	@OneToMany(mappedBy = "webCart")
+	@JsonIgnore
 	private List<WebCartDetail> webCartDetails;
 
 	public WebCart(String status, LocalDate createdDate, LocalDate cancelledDate, LocalDate lastSeenDate, User user,
