@@ -41,7 +41,7 @@ public class BillController {
 	@ApiResponses(value = {@ApiResponse(code=201,message = "Bill created correctly"), @ApiResponse(code=400,message = "invalid request")})
 	public ResponseEntity<Bill> insert(@Valid @RequestBody Bill bill){
 		Bill billNew=new Bill();
-		billNew=billService.insert(billNew);
+		billNew=billService.insert(bill);
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}").buildAndExpand(billNew.getId()).toUri();
 

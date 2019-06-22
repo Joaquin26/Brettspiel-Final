@@ -55,4 +55,8 @@ public class User {
 	@OneToMany(mappedBy = "user")
 	private List<WebCart> webCarts;
 	
+	@JsonIgnore
+	@OneToMany(mappedBy = "user")
+	private List<Bill> bills;
+	
 }
