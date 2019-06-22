@@ -98,8 +98,9 @@ public class CategoryController {
 			return new ResponseEntity<Category>(category.get(),HttpStatus.OK);
 		else 
 		{
-			category.get().setId(-1);
-			return new ResponseEntity<Category>(category.get(),HttpStatus.OK);
+			Category category2=new Category();
+			category2.setId(-1);
+			return new ResponseEntity<Category>(category2,HttpStatus.OK);
 		}
 
 	}
