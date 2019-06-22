@@ -35,7 +35,7 @@ public class WebCart {
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate createdDate;
 	
-	@Column(name = "cancelled_date", nullable = false)
+	@Column(name = "cancelled_date")
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate cancelledDate;
 	
@@ -47,7 +47,7 @@ public class WebCart {
 	@JoinColumn(name="user_id",nullable = false)
 	private User user;
 	
-	@JsonIgnore
+	
 	@OneToMany(mappedBy = "webCart")
 	private List<WebCartDetail> webCartDetails;
 

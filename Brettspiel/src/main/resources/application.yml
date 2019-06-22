@@ -2,13 +2,13 @@ spring:
  datasource:
     url: jdbc:postgresql://localhost:5432/Brettspiel
     username: postgres
-    password: 'admin'
+    password: '#RN14done'
     driver-class-name: org.postgresql.Driver
  jackson:    serialization:      WRITE_DATES_AS_TIMESTAMPS : false      
  jpa:
     database: postgresql
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
     show-sql: true
     properties.hibernate.temp.use_jdbc_metadata_defaults: false
     

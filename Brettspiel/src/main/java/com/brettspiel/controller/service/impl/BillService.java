@@ -13,7 +13,7 @@ import com.brettspiel.model.repository.IBillRepository;
 public class BillService implements IBillService {
 
 	@Autowired
-	IBillRepository billRepository;
+	private IBillRepository billRepository;
 	
 	@Override
 	public Bill insert(Bill t) {

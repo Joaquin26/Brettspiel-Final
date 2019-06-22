@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.Data;
 
 @Entity
@@ -32,6 +34,7 @@ public class Bill {
 	private CreditCard creditCard;
 	
 	@Column(name = "date",nullable = false)
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate date;
 	
 	@Column(name = "ruc")
@@ -41,9 +44,11 @@ public class Bill {
 	private String status;
 	
 	@Column(name = "start_rent_date",nullable = false)
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate startRentDayDate;
 	
 	@Column(name = "end_rent_day",nullable = false)
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate endRentDayDate;
 	
 	@Column(name = "membership_discount")

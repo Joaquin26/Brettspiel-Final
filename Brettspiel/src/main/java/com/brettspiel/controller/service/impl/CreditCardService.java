@@ -40,6 +40,9 @@ public class CreditCardService implements ICreditCardService {
 	public List<CreditCard> findAll() {
 		return creditCartRepository.findAll();
 	}
-	
 
+	@Override
+	public Optional<CreditCard> findByNumber(Integer number) {
+		return creditCartRepository.findByNumber(number);
+	}
 }
