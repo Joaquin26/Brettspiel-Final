@@ -23,7 +23,7 @@ public class WebCartDetail {
 	
 	@ManyToOne
 	@JoinColumn(name="webcart_id",nullable = false)
-	@JsonIgnore
+	
 	private WebCart webCart;
 	
 	@ManyToOne

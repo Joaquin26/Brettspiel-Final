@@ -135,7 +135,10 @@ public class UserController {
 			return new ResponseEntity<User>(user.get(),HttpStatus.OK);
 		}
 		else 
-			throw new ModelNotFoundException("username: "+username);
+		{	 User nu=new User();
+			nu.setId(-1);
+			return new ResponseEntity<User>(nu,HttpStatus.OK);
+		}
 
 	}
 

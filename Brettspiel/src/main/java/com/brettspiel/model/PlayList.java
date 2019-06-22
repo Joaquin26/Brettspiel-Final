@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -22,6 +23,7 @@ import lombok.Data;
 @Entity
 @Table(name = "playlists")
 @Data
+@NamedQuery(name="playListDetail.findByUserId", query="Select w from PlayList w where w.user.id= ?1")
 public class PlayList {
 	@Id
 	@GeneratedValue(strategy =GenerationType.IDENTITY)
