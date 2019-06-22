@@ -41,4 +41,10 @@ public class PlayListService implements IPlayListService {
 		return playListRepository.findAll();
 	}
 
+	@Override
+	public List<PlayList> findByUserId(int id) {
+		// TODO Auto-generated method stub
+		return playListRepository.findByUserId(id);
+	}
+
 }

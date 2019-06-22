@@ -88,4 +88,12 @@ public class PlayListController {
 			throw new ModelNotFoundException("ID: "+id);
 
 	}
+	@GetMapping(value = "findByUserId/{id}")
+	@ApiOperation(value = "Get a playList by User Id",notes="Service to get a playList with User Id")
+	@ApiResponses(value = {@ApiResponse(code=201,message = "PlayList found"), @ApiResponse(code=404,message = "PlayList not found")})
+	public ResponseEntity<List<PlayList>> findByUserId(@PathVariable("id") Integer id){
+		List<PlayList> playLists= new ArrayList<PlayList>();
+		playLists=playListService.findByUserId(id);
+		return new ResponseEntity<List<PlayList>>(playLists,HttpStatus.OK);
+	}
 }
