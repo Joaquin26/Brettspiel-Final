@@ -1,6 +1,7 @@
 package com.brettspiel.controller;
 
 import java.net.URI;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -24,11 +25,14 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.brettspiel.controller.service.ICreditCardService;
 import com.brettspiel.exception.ModelNotFoundException;
 import com.brettspiel.model.CreditCard;
+import com.brettspiel.model.User;
+import com.brettspiel.model.WebCart;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import javassist.expr.NewArray;
 
 @RestController
 @RequestMapping("/api/creditcard")
@@ -89,4 +93,17 @@ public class CreditCardController {
 
 	}
 
+	@GetMapping(value = "/findByNumber/{number}")
+	@ApiOperation(value = "Get a creditCard by number",notes="Service to get a creditCard by number")
+	@ApiResponses(value = {@ApiResponse(code=201,message = "CreditCard found"), @ApiResponse(code=404,message = "CreditCard not found")})
+	public ResponseEntity<CreditCard> findByNumber(@PathVariable("number") Integer number){
+		Optional<CreditCard> creditCard=creditCardService.findByNumber(number);
+		if(creditCard.isPresent())
+			return new ResponseEntity<CreditCard>(creditCard.get(),HttpStatus.OK);
+		else {
+			CreditCard a=new CreditCard();
+			a.setId(-1);
+			return new ResponseEntity<CreditCard>(a, HttpStatus.OK);
+		}
+	}
 }
