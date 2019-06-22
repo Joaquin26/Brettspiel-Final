@@ -41,7 +41,7 @@ public class BatchController {
 	@ApiResponses(value = {@ApiResponse(code=201,message = "Batch created correctly"), @ApiResponse(code=400,message = "invalid request")})
 	public ResponseEntity<Batch> insert(@Valid @RequestBody Batch batch){
 		Batch batchNew=new Batch();
-		batchNew=batchService.insert(batchNew);
+		batchNew=batchService.insert(batch);
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}").buildAndExpand(batchNew.getId()).toUri();
 

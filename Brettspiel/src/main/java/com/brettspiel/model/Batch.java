@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
@@ -33,9 +34,11 @@ public class Batch {
 	private Float snackCost;
 	
 	@Column(name = "expired_date",nullable = false)
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate expiredDate;
 	
 	@Column(name = "bought_date",nullable = false)
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate boughtDate;
 	
 	@JsonIgnore
