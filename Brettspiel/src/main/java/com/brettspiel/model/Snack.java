@@ -50,7 +50,7 @@ public class Snack {
 	
 	@OneToMany(mappedBy = "snack")
 	private List<Image> images;
-	
+	@JsonIgnore()
 	@OneToMany(mappedBy = "snack")
 	private List<Batch> batches;
 }

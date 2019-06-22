@@ -42,11 +42,50 @@ public class WebCartDetailController {
 	@ApiResponses(value = {@ApiResponse(code=201,message = "WebCartDetail created correctly"), @ApiResponse(code=400,message = "invalid request")})
 	public ResponseEntity<WebCartDetail> insert(@Valid @RequestBody WebCartDetail webCartDetail){
 		WebCartDetail webCartDetailNew=new WebCartDetail();
+		if(webCartDetail.getBoardGame() !=null) {
+		Optional<WebCartDetail> exist=webCartDetailService.repeated(webCartDetail.getWebCart().getId(),webCartDetail.getBoardGame().getId());
+			if(exist.isPresent()) {
+				exist.get().setQuantity(webCartDetail.getQuantity());
+				webCartDetailService.update(exist.get());
+				return new ResponseEntity<WebCartDetail>(HttpStatus.OK);
+			
+			}
+			else
+			{
+				webCartDetailNew=webCartDetailService.insert(webCartDetail);
+				URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+						.path("/{id}").buildAndExpand(webCartDetailNew.getId()).toUri();
+				
+				return ResponseEntity.created(location).build();
+			}
+		}
+		else {
+		if(webCartDetail.getSnack() !=null) {
+		Optional<WebCartDetail> exist2=webCartDetailService.repeatedSnack(webCartDetail.getWebCart().getId(),webCartDetail.getSnack().getId());
+			if(exist2.isPresent()) {
+				exist2.get().setQuantity(webCartDetail.getQuantity());
+				webCartDetailService.update(exist2.get());
+				return new ResponseEntity<WebCartDetail>(HttpStatus.OK);
+			
+			}
+			else
+			{
+				webCartDetailNew=webCartDetailService.insert(webCartDetail);
+				URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+						.path("/{id}").buildAndExpand(webCartDetailNew.getId()).toUri();
+				
+				return ResponseEntity.created(location).build();
+			}
+		}
+		else
+		{
 		webCartDetailNew=webCartDetailService.insert(webCartDetail);
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}").buildAndExpand(webCartDetailNew.getId()).toUri();
-
+		
 		return ResponseEntity.created(location).build();
+		}
+		}
 	}
 	
 	@PutMapping
@@ -86,6 +125,5 @@ public class WebCartDetailController {
 			return new ResponseEntity<WebCartDetail>(webCartDetail.get(),HttpStatus.OK);
 		else 
 			throw new ModelNotFoundException("ID: "+id);
-
 	}
 }

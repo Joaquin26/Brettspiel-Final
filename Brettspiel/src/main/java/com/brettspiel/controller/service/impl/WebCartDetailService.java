@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.brettspiel.controller.service.IWebCartDetailService;
+import com.brettspiel.model.WebCart;
 import com.brettspiel.model.WebCartDetail;
 import com.brettspiel.model.repository.IWebCartDetailRepository;
 
@@ -39,6 +40,17 @@ public class WebCartDetailService implements IWebCartDetailService {
 	@Override
 	public List<WebCartDetail> findAll() {
 		return webCartDetailRepository.findAll();
+	}
+
+	@Override
+	public Optional<WebCartDetail> repeated(int webcartId, int boardGameId) {
+			
+		return webCartDetailRepository.repeated(webcartId, boardGameId);
+	}
+	@Override
+	public Optional<WebCartDetail> repeatedSnack(int webcartId, int snackId) {
+		// TODO Auto-generated method stub
+		return webCartDetailRepository.repeatedSnack(webcartId, snackId);
 	}
 
 }
