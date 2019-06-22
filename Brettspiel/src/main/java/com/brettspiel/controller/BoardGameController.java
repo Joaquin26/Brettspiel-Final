@@ -137,7 +137,10 @@ public class BoardGameController {
 		Optional<BoardGame> boardGame=boardGameService.findByName(name);
 		if(boardGame.isPresent())
 			return new ResponseEntity<BoardGame>(boardGame.get(),HttpStatus.OK);
-		else 
-			throw new ModelNotFoundException("Name: "+name);
+		else {
+			BoardGame a=new BoardGame();
+			a.setId(-1);
+			return new ResponseEntity<BoardGame>(a,HttpStatus.OK);
+		}
 	}
 }
