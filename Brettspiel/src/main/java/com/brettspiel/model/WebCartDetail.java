@@ -21,7 +21,6 @@ public class WebCartDetail {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="webcart_id",nullable = false)
 	private WebCart webCart;
