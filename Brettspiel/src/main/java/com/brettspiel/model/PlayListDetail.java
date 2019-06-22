@@ -1,12 +1,11 @@
 package com.brettspiel.model;
-
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -14,29 +13,20 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 @Entity
-@Table(name = "webcartdetails")
+@Table(name = "playListDetails")
 @Data
-public class WebCartDetail {
+@NamedQuery(name="playListDetail.findByPlayListId", query="Select w from PlayListDetail w where w.playList.id= ?1")
+public class PlayListDetail {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy =GenerationType.IDENTITY)
 	private Integer id;
-	
-	@ManyToOne
-	@JoinColumn(name="webcart_id",nullable = false)
-	private WebCart webCart;
-	
-	@ManyToOne
-	@JoinColumn(name="snack_id")
-	private Snack snack;
 	
 	@ManyToOne
 	@JoinColumn(name="boardGame_id")
 	private BoardGame boardGame;
-	
 	@ManyToOne
-	@JoinColumn(name="promotion_id")
-	private Promotion promotion ;
+	@JsonIgnore
+	@JoinColumn(name="playList_id")
+	private PlayList playList;
 	
-	@Column(name = "quantity",nullable = false)
-	private Integer quantity;
 }

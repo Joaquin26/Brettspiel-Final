@@ -46,5 +46,17 @@ public class UserService implements IUserService {
 		// TODO Auto-generated method stub
 		return userRepository.findByCredentials(username, password);
 	}
+
+	@Override
+	public Optional<User> findByUsername(String username) {
+		// TODO Auto-generated method stub
+		return userRepository.findByUsername(username);
+	}
+
+	@Override
+	public Optional<User> findByEmail(String email) {
+		// TODO Auto-generated method stub
+		return userRepository.findByEmail(email);
+	}
 	
 }

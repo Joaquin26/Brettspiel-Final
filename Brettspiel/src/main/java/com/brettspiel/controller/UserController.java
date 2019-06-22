@@ -43,11 +43,31 @@ public class UserController {
 	@ApiResponses(value = {@ApiResponse(code=201,message = "User created correctly"), @ApiResponse(code=400,message = "invalid request")})
 	public ResponseEntity<User> insert(@Valid @RequestBody User user){
 		User userNew=new User();
-		userNew=userService.insert(user);
-		URI location = ServletUriComponentsBuilder.fromCurrentRequest()
-				.path("/{id}").buildAndExpand(userNew.getId()).toUri();
+		Optional<User> emailClone= userService.findByEmail(user.getEmail());
+		Optional<User> usernameClone=userService.findByUsername(user.getUsername());
 
-		return ResponseEntity.created(location).build();
+		if(usernameClone.isPresent())
+		{
+			user.setId(-2);
+			return  new ResponseEntity<User>(user,HttpStatus.OK);
+		}
+		else
+		{
+			if(emailClone.isPresent())
+			{
+				user.setId(-3);
+				return  new ResponseEntity<User>(user,HttpStatus.OK);
+			}
+			else
+			{
+				userNew=userService.insert(user);
+				URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+						.path("/{id}").buildAndExpand(userNew.getId()).toUri();
+
+				return ResponseEntity.created(location).build();
+			}
+		}
+		
 	}
 	
 	@PutMapping
@@ -105,4 +125,18 @@ public class UserController {
 			return new ResponseEntity<User>(userNew,HttpStatus.OK);
 		}
 	}
+	
+	@GetMapping(value = "findByUsername/{username}")
+	@ApiOperation(value = "Get a user by username",notes="Service to get a user by username")
+	@ApiResponses(value = {@ApiResponse(code=201,message = "User found"), @ApiResponse(code=404,message = "User not found")})
+	public ResponseEntity<User> findById(@PathVariable("username") String username){
+		Optional<User> user=userService.findByUsername(username);
+		if(user.isPresent()) {
+			return new ResponseEntity<User>(user.get(),HttpStatus.OK);
+		}
+		else 
+			throw new ModelNotFoundException("username: "+username);
+
+	}
+
 }

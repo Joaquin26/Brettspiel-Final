@@ -88,4 +88,20 @@ public class CategoryController {
 			throw new ModelNotFoundException("ID: "+id);
 
 	}
+	
+	@GetMapping(value = "/name/{name}")
+	@ApiOperation(value = "Get a category",notes="Service to get a category")
+	@ApiResponses(value = {@ApiResponse(code=201,message = "Category found"), @ApiResponse(code=404,message = "Category not found")})
+	public ResponseEntity<Category> findById(@PathVariable("name") String name){
+		Optional<Category> category=categoryService.findByName(name);
+		if(category.isPresent())
+			return new ResponseEntity<Category>(category.get(),HttpStatus.OK);
+		else 
+		{
+			Category category2=new Category();
+			category2.setId(-1);
+			return new ResponseEntity<Category>(category2,HttpStatus.OK);
+		}
+
+	}
 }

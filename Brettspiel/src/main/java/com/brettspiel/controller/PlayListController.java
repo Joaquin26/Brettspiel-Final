@@ -17,16 +17,22 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.brettspiel.controller.service.IPlayListService;
 import com.brettspiel.exception.ModelNotFoundException;
 import com.brettspiel.model.PlayList;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
+@RestController
+@RequestMapping("/api/playList")
+@Api(tags="PlayList", value="RESTFul PlayList Web Service")
 public class PlayListController {
 	@Autowired
 	private IPlayListService playListService;
