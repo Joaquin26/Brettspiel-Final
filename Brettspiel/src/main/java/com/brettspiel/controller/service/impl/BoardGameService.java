@@ -52,4 +52,9 @@ public class BoardGameService implements IBoardGameService {
 		return boardGameRepository.findByName(name.toUpperCase());
 	}
 
+	@Override
+	public List<BoardGame> findByPlayListId(Integer id) {
+		return boardGameRepository.findByPlayListId(id);
+	}
+
 }

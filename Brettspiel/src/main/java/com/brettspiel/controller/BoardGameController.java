@@ -143,4 +143,13 @@ public class BoardGameController {
 			return new ResponseEntity<BoardGame>(a,HttpStatus.OK);
 		}
 	}
+	
+	@GetMapping(value = "/PlayList/{id}")
+	@ApiOperation(value = "List BoardGames by filter",notes="Service to list all boardGames filters")
+	@ApiResponses(value = {@ApiResponse(code=201,message = "BoardGames found"), @ApiResponse(code=404,message = "BoardGames not found")})
+	public ResponseEntity<List<BoardGame>> findByPlayListId(@PathVariable("id") Integer id){
+		List<BoardGame> boardGames= new ArrayList<BoardGame>();
+		boardGames=boardGameService.findByPlayListId(id);
+		return new ResponseEntity<List<BoardGame>>(boardGames,HttpStatus.OK);
+	}
 }
