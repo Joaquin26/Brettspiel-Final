@@ -40,6 +40,9 @@ public class CopyService implements ICopyService {
 	public List<Copy> findAll() {
 		return copyRepository.findAll();
 	}
-	
 
+	@Override
+	public List<Copy> selectLimitAvailableByBoardGameId(Integer id, Integer limit) {
+		return copyRepository.selectLimitAvailableByBoardGameId(id, limit);
+	}
 }

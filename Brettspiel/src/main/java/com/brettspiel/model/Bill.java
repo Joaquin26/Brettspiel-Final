@@ -59,5 +59,7 @@ public class Bill {
 	
 	@OneToMany(mappedBy = "bill")
 	private List<BillDetail> billDetails;
-	
+
+	@OneToMany(mappedBy = "bill")
+	private List<BillCopyDetail> billCopyDetails;
 }

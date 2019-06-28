@@ -43,5 +43,9 @@ public class BatchService implements IBatchService {
 	public List<Batch> findAll() {
 		return batchRepository.findAll();
 	}
-	
+
+	@Override
+	public Optional<Batch> selectBySnackId(Integer id) {
+		return batchRepository.selectBySnackId(id);
+	}
 }

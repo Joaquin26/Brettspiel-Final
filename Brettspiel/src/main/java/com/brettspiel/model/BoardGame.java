@@ -70,11 +70,11 @@ public class BoardGame {
 		joinColumns = @JoinColumn(name = "boardgame_id"),
 		inverseJoinColumns = @JoinColumn(name = "category_id")
 	)
-	private Set<Category> categories = new HashSet<>();
+	private List<Category> categories;
 	
 	@JsonIgnore
 	@ManyToMany(mappedBy = "boardGames")
-	private Set<PlayList> playLists = new HashSet<>();
+	private List<PlayList> playLists;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "boardGame")

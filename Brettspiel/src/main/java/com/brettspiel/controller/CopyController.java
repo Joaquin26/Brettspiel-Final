@@ -87,8 +87,14 @@ public class CopyController {
 		 else 
 			 throw new ModelNotFoundException("ID: "+id);
 	 }
-	 
-	 
+
+	@GetMapping(value = "selectLimitAvailableByBoardGameId/{id}/{limit}")
+	@ApiOperation(value = "Get available copies by board game if and a set limit",notes="Service to get copies")
+	@ApiResponses(value = {@ApiResponse(code=201,message = "Copies found"), @ApiResponse(code=404,message = "Copies not found")})
+	public ResponseEntity<List<Copy>> selectLimitAvailableByBoardGameId(@PathVariable("id") Integer id, @PathVariable("limit") Integer limit) {
+		List<Copy> copies = copyService.selectLimitAvailableByBoardGameId(id, limit);
+		return new ResponseEntity<>(copies, HttpStatus.OK);
+	}
 	 
 	 
 }

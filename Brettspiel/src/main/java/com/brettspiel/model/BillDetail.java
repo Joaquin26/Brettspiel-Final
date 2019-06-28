@@ -28,7 +28,7 @@ public class BillDetail {
 	private Batch batch;
 	
 	@ManyToOne
-	@JoinColumn(name="promotion_id",nullable = false)
+	@JoinColumn(name="promotion_id")
 	private Promotion promotion;
 	
 	@Column(name = "quantity",nullable = false)

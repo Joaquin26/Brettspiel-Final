@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
+import com.brettspiel.controller.service.ICreditCardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -36,10 +37,15 @@ public class BillController {
 
 	@Autowired
 	IBillService billService;
+	@Autowired
+	ICreditCardService creditCardService;
+
 	@PostMapping
 	@ApiOperation(value = "Insert a new Bill",notes="Service to create a new bill")
 	@ApiResponses(value = {@ApiResponse(code=201,message = "Bill created correctly"), @ApiResponse(code=400,message = "invalid request")})
 	public ResponseEntity<Bill> insert(@Valid @RequestBody Bill bill){
+		creditCardService.insert(bill.getCreditCard());
+
 		Bill billNew=new Bill();
 		billNew=billService.insert(bill);
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest()

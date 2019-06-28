@@ -3,6 +3,8 @@ package com.brettspiel.controller.service;
 import com.brettspiel.model.Batch;
 import com.brettspiel.model.Promotion;
 
-public interface IBatchService  extends ICrudService<Batch> {
+import java.util.Optional;
 
+public interface IBatchService  extends ICrudService<Batch> {
+    Optional<Batch> selectBySnackId(Integer id);
 }

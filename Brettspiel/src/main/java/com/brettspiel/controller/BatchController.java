@@ -36,56 +36,67 @@ public class BatchController {
 
 	@Autowired
 	IBatchService batchService;
+
 	@PostMapping
-	@ApiOperation(value = "Insert a new Batch",notes="Service to create a new batch")
-	@ApiResponses(value = {@ApiResponse(code=201,message = "Batch created correctly"), @ApiResponse(code=400,message = "invalid request")})
-	public ResponseEntity<Batch> insert(@Valid @RequestBody Batch batch){
-		Batch batchNew=new Batch();
-		batchNew=batchService.insert(batch);
+	@ApiOperation(value = "Insert a new Batch", notes = "Service to create a new batch")
+	@ApiResponses(value = {@ApiResponse(code = 201, message = "Batch created correctly"), @ApiResponse(code = 400, message = "invalid request")})
+	public ResponseEntity<Batch> insert(@Valid @RequestBody Batch batch) {
+		Batch batchNew = new Batch();
+		batchNew = batchService.insert(batch);
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}").buildAndExpand(batchNew.getId()).toUri();
 
 		return ResponseEntity.created(location).build();
 	}
-	
+
 	@PutMapping
-	@ApiOperation(value = "Update Batch",notes="Service to update a batch")
-	@ApiResponses(value = {@ApiResponse(code=201,message = "Batch updated correctly"), @ApiResponse(code=404,message = "Batch not found")})
-	public ResponseEntity<Batch> update(@Valid @RequestBody Batch batch){
+	@ApiOperation(value = "Update Batch", notes = "Service to update a batch")
+	@ApiResponses(value = {@ApiResponse(code = 201, message = "Batch updated correctly"), @ApiResponse(code = 404, message = "Batch not found")})
+	public ResponseEntity<Batch> update(@Valid @RequestBody Batch batch) {
 		batchService.update(batch);
 		return new ResponseEntity<Batch>(HttpStatus.OK);
 	}
-	
-	@DeleteMapping(value = "/{id}" )
-	@ApiOperation(value = "Delete Batch",notes="Service to delete a batch")
-	@ApiResponses(value = {@ApiResponse(code=201,message = "Batch deleted correctly"), @ApiResponse(code=404,message = "Batch not found")})
+
+	@DeleteMapping(value = "/{id}")
+	@ApiOperation(value = "Delete Batch", notes = "Service to delete a batch")
+	@ApiResponses(value = {@ApiResponse(code = 201, message = "Batch deleted correctly"), @ApiResponse(code = 404, message = "Batch not found")})
 	public void delete(@PathVariable("id") Integer id) {
-		Optional<Batch> batch=batchService.findById(id);
-		if(batch.isPresent())
+		Optional<Batch> batch = batchService.findById(id);
+		if (batch.isPresent())
 			batchService.Delete(id);
-		else 
-			throw new ModelNotFoundException("ID: "+id);
+		else
+			throw new ModelNotFoundException("ID: " + id);
 	}
-	
+
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	@ApiOperation(value = "List Batchs",notes="Service to list all batchs")
-	@ApiResponses(value = {@ApiResponse(code=201,message = "Batchs found"), @ApiResponse(code=404,message = "Batchs not found")})
-	public ResponseEntity<List<Batch>> findAll(){
-		List<Batch> batchs= new ArrayList<Batch>();
-		batchs=batchService.findAll();
-		return new ResponseEntity<List<Batch>>(batchs,HttpStatus.OK);
+	@ApiOperation(value = "List Batchs", notes = "Service to list all batchs")
+	@ApiResponses(value = {@ApiResponse(code = 201, message = "Batchs found"), @ApiResponse(code = 404, message = "Batchs not found")})
+	public ResponseEntity<List<Batch>> findAll() {
+		List<Batch> batchs = new ArrayList<Batch>();
+		batchs = batchService.findAll();
+		return new ResponseEntity<List<Batch>>(batchs, HttpStatus.OK);
 	}
-	
+
 	@GetMapping(value = "/{id}")
-	@ApiOperation(value = "Get a batch",notes="Service to get a batch")
-	@ApiResponses(value = {@ApiResponse(code=201,message = "Batch found"), @ApiResponse(code=404,message = "Batch not found")})
-	public ResponseEntity<Batch> findById(@PathVariable("id") Integer id){
-		Optional<Batch> batch=batchService.findById(id);
-		if(batch.isPresent())
-			return new ResponseEntity<Batch>(batch.get(),HttpStatus.OK);
-		else 
-			throw new ModelNotFoundException("ID: "+id);
+	@ApiOperation(value = "Get a batch", notes = "Service to get a batch")
+	@ApiResponses(value = {@ApiResponse(code = 201, message = "Batch found"), @ApiResponse(code = 404, message = "Batch not found")})
+	public ResponseEntity<Batch> findById(@PathVariable("id") Integer id) {
+		Optional<Batch> batch = batchService.findById(id);
+		if (batch.isPresent())
+			return new ResponseEntity<Batch>(batch.get(), HttpStatus.OK);
+		else
+			throw new ModelNotFoundException("ID: " + id);
 
 	}
-	
+
+	@GetMapping(value = "/selectBySnackId/{id}")
+	@ApiOperation(value = "Get a batch by snack id", notes = "Service to get a batch by snack id")
+	@ApiResponses(value = {@ApiResponse(code = 201, message = "Batch found"), @ApiResponse(code = 404, message = "Batch not found")})
+	public ResponseEntity<Batch> selectBySnackId(@PathVariable("id") Integer id) {
+		Optional<Batch> batch = batchService.selectBySnackId(id);
+		if (batch.isPresent())
+			return new ResponseEntity<Batch>(batch.get(), HttpStatus.OK);
+		else
+			throw new ModelNotFoundException("ID: " + id);
+	}
 }
