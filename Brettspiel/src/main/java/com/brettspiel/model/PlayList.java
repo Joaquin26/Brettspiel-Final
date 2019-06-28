@@ -1,6 +1,7 @@
 package com.brettspiel.model;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -47,6 +48,5 @@ public class PlayList {
 		joinColumns = @JoinColumn(name = "playlist_id"),
 		inverseJoinColumns = @JoinColumn(name = "boardgame_id")
 	)
-	@JsonIgnore
-	private Set<BoardGame> boardGames= new HashSet<>();
+	private List<BoardGame> boardGames;
 }

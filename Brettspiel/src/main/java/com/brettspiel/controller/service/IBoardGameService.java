@@ -8,4 +8,5 @@ import com.brettspiel.model.BoardGame;
 public interface IBoardGameService extends ICrudService<BoardGame> {
 	public List<BoardGame> filter(String categoryName,Integer age,Float minCost,Float maxCost,Integer minPlayers,String name);
 	public Optional<BoardGame> findByName(String name);
+	public List<BoardGame> findByPlayListId(Integer id);
 }

@@ -54,7 +54,9 @@ public class PlayListController {
 	@ApiResponses(value = {@ApiResponse(code=201,message = "PlayList updated correctly"), @ApiResponse(code=404,message = "PlayList not found")})
 	public ResponseEntity<PlayList> update(@Valid @RequestBody PlayList playList){
 		playListService.update(playList);
+		System.out.println("Actualizando"+playList.getName());
 		return new ResponseEntity<PlayList>(HttpStatus.OK);
+		
 	}
 	
 	@DeleteMapping(value = "/{id}" )
