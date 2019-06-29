@@ -44,6 +44,9 @@ public class BoardGameService implements IBoardGameService {
 
 	@Override
 	public List<BoardGame> filter(String categoryName,Integer age, Float minCost,Float maxCost, Integer minPlayers,String name) {
+		System.out.println(age);
+		if(age==0)
+			return boardGameRepository.filterWithoutAge(categoryName, minCost, maxCost, minPlayers, name.toUpperCase());
 		return boardGameRepository.filter(categoryName,age,minCost,maxCost,minPlayers,name.toUpperCase());
 	}
 

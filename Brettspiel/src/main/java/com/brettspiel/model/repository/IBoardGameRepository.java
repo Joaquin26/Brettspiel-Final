@@ -11,10 +11,17 @@ import com.brettspiel.model.BoardGame;
 
 public interface IBoardGameRepository extends JpaRepository<BoardGame, Integer> {
 	@Query(value="select distinct b from BoardGame b join b.categories c " + 
-			"where c.name like %:categoryName% and b.minAge>=:age and b.pricePerDay<=:maxCost and b.pricePerDay>=:minCost and "
+			"where c.name like %:categoryName% and b.minAge=:age and b.pricePerDay<=:maxCost and b.pricePerDay>=:minCost and "
 			+ "b.maxNumberPlayers>=:minPlayers and b.name like %:name%")
-	public List<BoardGame> filter(@Param("categoryName") String categoryId,@Param("age") Integer age,@Param("minCost") Float minCost,
+	public List<BoardGame> filter(@Param("categoryName") String categoryName,@Param("age") Integer age,@Param("minCost") Float minCost,
 			@Param("maxCost") Float maxCost,@Param("minPlayers") Integer minPlayers, @Param("name") String name);
+	
+	@Query(value="select distinct b from BoardGame b join b.categories c " + 
+			"where c.name like %:categoryName%  and b.pricePerDay<=:maxCost and b.pricePerDay>=:minCost and "
+			+ "b.maxNumberPlayers>=:minPlayers and b.name like %:name%")
+	public List<BoardGame> filterWithoutAge(@Param("categoryName") String categoryName,@Param("minCost") Float minCost,
+			@Param("maxCost") Float maxCost,@Param("minPlayers") Integer minPlayers, @Param("name") String name);
+	
 	
 	public Optional<BoardGame> findByName(String name);
 	
