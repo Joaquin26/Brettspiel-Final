@@ -1,17 +1,10 @@
 package com.brettspiel.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 @Entity
@@ -19,14 +12,15 @@ import lombok.Data;
 @Data
 @NamedQuery(name="WebCartDetail.repeatedSnack", query="Select w from WebCartDetail w where w.webCart.id= ?1 and snack.id=?2")
 @NamedQuery(name="WebCartDetail.repeated", query="Select w from WebCartDetail w where w.webCart.id= ?1 and boardGame.id=?2")
+@NamedQuery(name="WebCartDetail.findByWebcartId", query="Select w from WebCartDetail w where w.webCart.id= ?1")
 public class WebCartDetail {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
-	@ManyToOne
+
+	@ManyToOne()
 	@JoinColumn(name="webcart_id",nullable = false)
-	
+	@JsonIgnoreProperties({"webCartDetails","createdDate","cancelledDate","lastSeenDate","user"})
 	private WebCart webCart;
 	
 	@ManyToOne
