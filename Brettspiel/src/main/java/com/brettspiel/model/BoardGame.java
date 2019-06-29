@@ -61,7 +61,7 @@ public class BoardGame {
 	
 	@Column(name = "cost", nullable = false)
 	private Float cost;
-	@JsonIgnore
+	
 	@ManyToMany(cascade = {
 		    CascadeType.PERSIST,
 		    CascadeType.MERGE
